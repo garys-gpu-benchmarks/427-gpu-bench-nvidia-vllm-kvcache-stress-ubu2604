@@ -38,8 +38,8 @@ summary,ok,8,40,25,12,20,8,40
 ## Metrics
 
 - **#1: Aggregate decode throughput, tokens/s** — stored as `decode_throughput_tokens_sec`.
-- **#2: Time To First Token, ms** — stored as `ttft_msec`.
-- **#3: TPOT, ms** — stored as `tpot_msec`.
+- **#2: Time To First Token p50, ms** — stored as `ttft_msec`.
+- **#3: TPOT p50, ms** — stored as `tpot_msec`.
 - **#4: Peak KV-cache usage, GiB** — stored as `kv_cache_peak_gb`.
 - **#5: KV-cache usage peak, pct** — stored as `kv_cache_usage_peak_pct`.
 
