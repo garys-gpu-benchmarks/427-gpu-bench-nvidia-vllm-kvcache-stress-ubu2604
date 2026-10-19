@@ -31,13 +31,13 @@ Start python -m vllm.entrypoints.openai.api_server on port 8000, then run script
 
 raw_results.csv with sweep_0, sweep_1, and a summary row. raw_results.jsonl and raw_output.txt carry the same records
 
-check_name,status,completed_requests,output_tokens_per_sec,ttft_msec,tpot_msec,kv_cache_usage_peak_pct,kv_cache_peak_gb,sustained_decode_throughput_under_cache_pressure_tokens_sec
+check_name,status,completed_requests,output_tokens_per_sec,ttft_msec,tpot_msec,kv_cache_usage_peak_pct,kv_cache_peak_gb,decode_throughput_tokens_sec
 sweep_0,ok,8,40,25,12,20,8,40
 summary,ok,8,40,25,12,20,8,40
 
 ## Metrics
 
-- **#1: Decode throughput, tokens/s** — stored as `sustained_decode_throughput_under_cache_pressure_tokens_sec`.
+- **#1: Aggregate decode throughput, tokens/s** — stored as `decode_throughput_tokens_sec`.
 - **#2: Time To First Token, ms** — stored as `ttft_msec`.
 - **#3: TPOT, ms** — stored as `tpot_msec`.
 - **#4: Peak KV-cache usage, GiB** — stored as `kv_cache_peak_gb`.
@@ -88,7 +88,7 @@ BENCHMARK_DB=tests/fixtures/benchmark.db \
 
 raw_results.csv with sweep_0, sweep_1, and a summary row. raw_results.jsonl and raw_output.txt carry the same records
 
-check_name,status,completed_requests,output_tokens_per_sec,ttft_msec,tpot_msec,kv_cache_usage_peak_pct,kv_cache_peak_gb,sustained_decode_throughput_under_cache_pressure_tokens_sec
+check_name,status,completed_requests,output_tokens_per_sec,ttft_msec,tpot_msec,kv_cache_usage_peak_pct,kv_cache_peak_gb,decode_throughput_tokens_sec
 sweep_0,ok,8,40,25,12,20,8,40
 summary,ok,8,40,25,12,20,8,40
 
