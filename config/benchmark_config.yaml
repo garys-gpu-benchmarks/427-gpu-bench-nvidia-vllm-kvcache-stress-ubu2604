@@ -23,7 +23,7 @@ sweep:
   num_prompts:
     smoke: 2
     baseline: 136
-    extended: 768
+    extended: 592
   concurrency:
     smoke: 2
     baseline: 8

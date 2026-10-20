@@ -17,7 +17,7 @@ Starts python -m vllm.entrypoints.openai.api_server with mistralai/Mistral-7B-v0
 | dataset_name | `--dataset-name` | smoke=synthetic, baseline=synthetic, extended=synthetic | synthetic | From Parameter list; see Execution Description With Parameters. |
 | input_len | `--input-len` | smoke=64, baseline=4096, extended=4096 | 4096 | From Parameter list; see Execution Description With Parameters. |
 | output_len | `--output-len` | smoke=16, baseline=256, extended=256 | 256 | From Parameter list; see Execution Description With Parameters. |
-| num_prompts | `--num-prompts` | smoke=2, baseline=136, extended=768 | 136 | From Parameter list; see Execution Description With Parameters. |
+| num_prompts | `--num-prompts` | smoke=2, baseline=136, extended=592 | 136 | From Parameter list; see Execution Description With Parameters. |
 | concurrency | `--concurrency` | smoke=2, baseline=8, extended=8 | 8 | From Parameter list; see Execution Description With Parameters. |
 | seed | `--seed` | smoke=0, baseline=0, extended=0 | 0 | From Parameter list; see Execution Description With Parameters. |
 
