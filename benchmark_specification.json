@@ -102,17 +102,17 @@
   {
     "field_name": "run_benchmark Command Plus Options for Smoke Run",
     "source_file": "BenchmarkSpecDefinitions.xlsx::Workload_Definitions",
-    "value": "bash run_benchmark.sh --smoke --validate --serving-engine vllm --model-name mistralai/Mistral-7B-v0.3 --dtype bfloat16 --kv-cache-dtype auto --gpu-memory-utilization 0.9 --max-model-len 128 --dataset-name synthetic --input-len 64 --output-len 16 --num-prompts 2 --concurrency 2 --seed 0"
+    "value": "bash run_benchmark.sh --smoke --validate --model-name mistralai/Mistral-7B-v0.3 --dtype bfloat16 --kv-cache-dtype auto --gpu-memory-utilization 0.9 --max-model-len 128 --input-len 64 --output-len 16 --num-prompts 2 --concurrency 2 --seed 0"
   },
   {
     "field_name": "run_benchmark Command Plus Options for Baseline Run",
     "source_file": "BenchmarkSpecDefinitions.xlsx::Workload_Definitions",
-    "value": "bash run_benchmark.sh --baseline --validate --serving-engine vllm --model-name mistralai/Mistral-7B-v0.3 --dtype bfloat16 --kv-cache-dtype auto --gpu-memory-utilization 0.9 --max-model-len 8192 --dataset-name synthetic --input-len 4096 --output-len 256 --num-prompts 136 --concurrency 8 --seed 0"
+    "value": "bash run_benchmark.sh --baseline --validate --model-name mistralai/Mistral-7B-v0.3 --dtype bfloat16 --kv-cache-dtype auto --gpu-memory-utilization 0.9 --max-model-len 8192 --input-len 4096 --output-len 256 --num-prompts 136 --concurrency 8 --seed 0"
   },
   {
     "field_name": "run_benchmark Command Plus Options for Extended Run",
     "source_file": "BenchmarkSpecDefinitions.xlsx::Workload_Definitions",
-    "value": "bash run_benchmark.sh --extended --validate --serving-engine vllm --model-name mistralai/Mistral-7B-v0.3 --dtype bfloat16 --kv-cache-dtype auto --gpu-memory-utilization 0.9 --max-model-len 8192 --dataset-name synthetic --input-len 4096 --output-len 256 --num-prompts 592 --concurrency 8 --seed 0"
+    "value": "bash run_benchmark.sh --extended --validate --model-name mistralai/Mistral-7B-v0.3 --dtype bfloat16 --kv-cache-dtype auto --gpu-memory-utilization 0.9 --max-model-len 8192 --input-len 4096 --output-len 256 --num-prompts 592 --concurrency 8 --seed 0"
   },
   {
     "field_name": "Output Fields / Metrics to Parse",
@@ -227,62 +227,62 @@
   {
     "field_name": "Parameter_01",
     "source_file": "BenchmarkSpecDefinitions.xlsx::Workload_Definitions",
-    "value": "serving_engine"
+    "value": "model_name"
   },
   {
     "field_name": "Parameter_02",
     "source_file": "BenchmarkSpecDefinitions.xlsx::Workload_Definitions",
-    "value": "model_name"
+    "value": "dtype"
   },
   {
     "field_name": "Parameter_03",
     "source_file": "BenchmarkSpecDefinitions.xlsx::Workload_Definitions",
-    "value": "dtype"
+    "value": "kv_cache_dtype"
   },
   {
     "field_name": "Parameter_04",
     "source_file": "BenchmarkSpecDefinitions.xlsx::Workload_Definitions",
-    "value": "kv_cache_dtype"
+    "value": "gpu_memory_utilization"
   },
   {
     "field_name": "Parameter_05",
     "source_file": "BenchmarkSpecDefinitions.xlsx::Workload_Definitions",
-    "value": "gpu_memory_utilization"
+    "value": "max_model_len"
   },
   {
     "field_name": "Parameter_06",
     "source_file": "BenchmarkSpecDefinitions.xlsx::Workload_Definitions",
-    "value": "max_model_len"
+    "value": "input_len"
   },
   {
     "field_name": "Parameter_07",
     "source_file": "BenchmarkSpecDefinitions.xlsx::Workload_Definitions",
-    "value": "dataset_name"
+    "value": "output_len"
   },
   {
     "field_name": "Parameter_08",
     "source_file": "BenchmarkSpecDefinitions.xlsx::Workload_Definitions",
-    "value": "input_len"
+    "value": "num_prompts"
   },
   {
     "field_name": "Parameter_09",
     "source_file": "BenchmarkSpecDefinitions.xlsx::Workload_Definitions",
-    "value": "output_len"
+    "value": "concurrency"
   },
   {
     "field_name": "Parameter_10",
     "source_file": "BenchmarkSpecDefinitions.xlsx::Workload_Definitions",
-    "value": "num_prompts"
+    "value": "seed"
   },
   {
     "field_name": "Parameter_11",
     "source_file": "BenchmarkSpecDefinitions.xlsx::Workload_Definitions",
-    "value": "concurrency"
+    "value": "-"
   },
   {
     "field_name": "Parameter_12",
     "source_file": "BenchmarkSpecDefinitions.xlsx::Workload_Definitions",
-    "value": "seed"
+    "value": "-"
   },
   {
     "field_name": "Parameter_13",
@@ -407,7 +407,7 @@
   {
     "field_name": "Profile Parameter Values",
     "source_file": "BenchmarkSpecDefinitions.xlsx::Parameters_SmokeBaselineExtend",
-    "value": "{\"model_name\": {\"smoke\": \"mistralai/Mistral-7B-v0.3\", \"baseline\": \"mistralai/Mistral-7B-v0.3\", \"extended\": \"mistralai/Mistral-7B-v0.3\", \"notes\": \"\"}, \"dtype\": {\"smoke\": \"bfloat16\", \"baseline\": \"bfloat16\", \"extended\": \"bfloat16\", \"notes\": \"\"}, \"kv_cache_dtype\": {\"smoke\": \"auto\", \"baseline\": \"auto\", \"extended\": \"auto\", \"notes\": \"\"}, \"gpu_memory_utilization\": {\"smoke\": \"0.9\", \"baseline\": \"0.9\", \"extended\": \"0.9\", \"notes\": \"\"}, \"max_model_len\": {\"smoke\": \"128\", \"baseline\": \"8192\", \"extended\": \"8192\", \"notes\": \"\"}, \"input_len\": {\"smoke\": \"64\", \"baseline\": \"4096\", \"extended\": \"4096\", \"notes\": \"\"}, \"output_len\": {\"smoke\": \"16\", \"baseline\": \"256\", \"extended\": \"256\", \"notes\": \"H100 2026-08-16 tiny_kv has NO TOKEN_DELAY. Probe 2000 prompts -> 13s. Predict 32000 -> ~208s. Do not copy AMD 72000. Extended 91000 extrapolated ~10:00, not tested.\"}, \"num_prompts\": {\"smoke\": \"2\", \"baseline\": \"136\", \"extended\": \"592\", \"notes\": \"Retimed 2026-08-17 toward 3-4 min baseline; extended scaled by the same factor. | 2026-09-28 GARY_LEDGER (aggregated_runtime_ledgers_101_201_301_401_20260928_9am; targets baseline 3-5 min, extended 8-15 min): 450/1320 -> 192/920. baseline 450 measured 6:39/7:04, extended 1320 measured 16:13. Two-point fit ~0.65 s/prompt + ~120 s server start. 192/920 (divisible by concurrency 8) targets ~4:05 / ~12:00. Unconfirmed by a fresh run.\"}, \"concurrency\": {\"smoke\": \"2\", \"baseline\": \"8\", \"extended\": \"8\", \"notes\": \"\"}, \"seed\": {\"smoke\": \"0\", \"baseline\": \"0\", \"extended\": \"0\", \"notes\": \"\"}, \"serving_engine\": {\"smoke\": \"vllm\", \"baseline\": \"vllm\", \"extended\": \"vllm\", \"notes\": \"\"}, \"dataset_name\": {\"smoke\": \"synthetic\", \"baseline\": \"synthetic\", \"extended\": \"synthetic\", \"notes\": \"\"}}"
+    "value": "{\"model_name\": {\"smoke\": \"mistralai/Mistral-7B-v0.3\", \"baseline\": \"mistralai/Mistral-7B-v0.3\", \"extended\": \"mistralai/Mistral-7B-v0.3\", \"notes\": \"\"}, \"dtype\": {\"smoke\": \"bfloat16\", \"baseline\": \"bfloat16\", \"extended\": \"bfloat16\", \"notes\": \"\"}, \"kv_cache_dtype\": {\"smoke\": \"auto\", \"baseline\": \"auto\", \"extended\": \"auto\", \"notes\": \"\"}, \"gpu_memory_utilization\": {\"smoke\": \"0.9\", \"baseline\": \"0.9\", \"extended\": \"0.9\", \"notes\": \"\"}, \"max_model_len\": {\"smoke\": \"128\", \"baseline\": \"8192\", \"extended\": \"8192\", \"notes\": \"\"}, \"input_len\": {\"smoke\": \"64\", \"baseline\": \"4096\", \"extended\": \"4096\", \"notes\": \"\"}, \"output_len\": {\"smoke\": \"16\", \"baseline\": \"256\", \"extended\": \"256\", \"notes\": \"H100 2026-08-16 tiny_kv has NO TOKEN_DELAY. Probe 2000 prompts -> 13s. Predict 32000 -> ~208s. Do not copy AMD 72000. Extended 91000 extrapolated ~10:00, not tested.\"}, \"num_prompts\": {\"smoke\": \"2\", \"baseline\": \"136\", \"extended\": \"592\", \"notes\": \"Retimed 2026-08-17 toward 3-4 min baseline; extended scaled by the same factor. | 2026-09-28 GARY_LEDGER (aggregated_runtime_ledgers_101_201_301_401_20260928_9am; targets baseline 3-5 min, extended 8-15 min): 450/1320 -> 192/920. baseline 450 measured 6:39/7:04, extended 1320 measured 16:13. Two-point fit ~0.65 s/prompt + ~120 s server start. 192/920 (divisible by concurrency 8) targets ~4:05 / ~12:00. Unconfirmed by a fresh run.\"}, \"concurrency\": {\"smoke\": \"2\", \"baseline\": \"8\", \"extended\": \"8\", \"notes\": \"\"}, \"seed\": {\"smoke\": \"0\", \"baseline\": \"0\", \"extended\": \"0\", \"notes\": \"\"}}"
   },
   {
     "field_name": "Profile Command Authorship",

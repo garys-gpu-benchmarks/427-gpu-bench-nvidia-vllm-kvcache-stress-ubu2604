@@ -2,7 +2,7 @@
 # Workbook profile values replace the same keys in a locked overlay.
 sweep:
   profile: baseline
-  serving_engine: vllm
+  serving_engine: true
   model_name: mistralai/Mistral-7B-v0.3
   dtype: bfloat16
   kv_cache_dtype: auto
@@ -11,7 +11,7 @@ sweep:
     smoke: 128
     baseline: 8192
     extended: 8192
-  dataset_name: synthetic
+  dataset_name: true
   input_len:
     smoke: 64
     baseline: 4096

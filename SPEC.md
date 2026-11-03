@@ -2,19 +2,17 @@
 
 ## Execution Description
 
-Starts python -m vllm.entrypoints.openai.api_server with mistralai/Mistral-7B-v0.3 on 127.0.0.1:8000 for every profile, waits for /v1/models, runs scripts/benchmark_serving.py once, then stops the server. input_len, output_len, num_prompts, concurrency, and max_model_len come from yaml. output_format: csv Sweep dimensions: serving_engine, model_name, dtype, kv_cache_dtype, gpu_memory_utilization, max_model_len, dataset_name, input_len.
+Starts python -m vllm.entrypoints.openai.api_server with mistralai/Mistral-7B-v0.3 on 127.0.0.1:8000 for every profile, waits for /v1/models, runs scripts/benchmark_serving.py once, then stops the server. input_len, output_len, num_prompts, concurrency, and max_model_len come from yaml. output_format: csv Sweep dimensions: model_name, dtype, kv_cache_dtype, gpu_memory_utilization, max_model_len, input_len, output_len, num_prompts.
 
 ## Parameters
 
 | Parameter | CLI Flag | Tested Values | Default | Description |
 | --- | --- | --- | --- | --- |
-| serving_engine | `--serving-engine` | smoke=vllm, baseline=vllm, extended=vllm | vllm | From Parameter list; see Execution Description With Parameters. |
 | model_name | `--model-name` | smoke=mistralai/Mistral-7B-v0.3, baseline=mistralai/Mistral-7B-v0.3, extended=mistralai/Mistral-7B-v0.3 | mistralai/Mistral-7B-v0.3 | From Parameter list; see Execution Description With Parameters. |
 | dtype | `--dtype` | smoke=bfloat16, baseline=bfloat16, extended=bfloat16 | bfloat16 | From Parameter list; see Execution Description With Parameters. |
 | kv_cache_dtype | `--kv-cache-dtype` | smoke=auto, baseline=auto, extended=auto | auto | From Parameter list; see Execution Description With Parameters. |
 | gpu_memory_utilization | `--gpu-memory-utilization` | smoke=0.9, baseline=0.9, extended=0.9 | 0.9 | From Parameter list; see Execution Description With Parameters. |
 | max_model_len | `--max-model-len` | smoke=128, baseline=8192, extended=8192 | 8192 | From Parameter list; see Execution Description With Parameters. |
-| dataset_name | `--dataset-name` | smoke=synthetic, baseline=synthetic, extended=synthetic | synthetic | From Parameter list; see Execution Description With Parameters. |
 | input_len | `--input-len` | smoke=64, baseline=4096, extended=4096 | 4096 | From Parameter list; see Execution Description With Parameters. |
 | output_len | `--output-len` | smoke=16, baseline=256, extended=256 | 256 | From Parameter list; see Execution Description With Parameters. |
 | num_prompts | `--num-prompts` | smoke=2, baseline=136, extended=592 | 136 | From Parameter list; see Execution Description With Parameters. |
