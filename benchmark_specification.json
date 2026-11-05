@@ -20,7 +20,7 @@
     "value": "Ubuntu 26.04"
   },
   {
-    "field_name": "Repo Name",
+    "field_name": "Repo Base Name",
     "source_file": "BenchmarkSpecDefinitions.xlsx::Workload_Definitions",
     "value": "gpu-bench-nvidia-vllm-kvcache-stress-ubu2604"
   },
@@ -35,199 +35,9 @@
     "value": "Analyze LLM KV-cache stress under long contexts"
   },
   {
-    "field_name": "Validation Objective",
-    "source_file": "BenchmarkSpecDefinitions.xlsx::Workload_Definitions",
-    "value": "Validates decode throughput, TTFT, TPOT, and KV-cache occupancy from the real vLLM OpenAI server. Every profile starts python -m vllm.entrypoints.openai.api_server"
-  },
-  {
     "field_name": "Metrics",
     "source_file": "BenchmarkSpecDefinitions.xlsx::Workload_Definitions",
     "value": "#1: Aggregate decode throughput, tokens/s (decode_throughput_tokens_sec); #2: Time To First Token p50, ms (ttft_msec); #3: TPOT p50, ms (tpot_msec); #4: Peak KV-cache usage, GiB (kv_cache_peak_gb); #5: KV-cache usage peak, pct (kv_cache_usage_peak_pct)"
-  },
-  {
-    "field_name": "Command Tools Executed",
-    "source_file": "BenchmarkSpecDefinitions.xlsx::Workload_Definitions",
-    "value": "Start python -m vllm.entrypoints.openai.api_server on port 8000, then run scripts/benchmark_serving.py"
-  },
-  {
-    "field_name": "Command Execution Details and Purpose",
-    "source_file": "BenchmarkSpecDefinitions.xlsx::Workload_Definitions",
-    "value": "Start python -m vllm.entrypoints.openai.api_server --model mistralai/Mistral-7B-v0.3 on 127.0.0.1:8000 for every profile, wait for /v1/models, run scripts/benchmark_serving.py once with yaml input_len, output_len, num_prompts, and concurrency, then stop the server, to measure KV-cache stress"
-  },
-  {
-    "field_name": "Command Methodology",
-    "source_file": "BenchmarkSpecDefinitions.xlsx::Workload_Definitions",
-    "value": "Start python -m vllm.entrypoints.openai.api_server with mistralai/Mistral-7B-v0.3 on 127.0.0.1:8000 for every profile, wait for /v1/models, run scripts/benchmark_serving.py once with yaml input_len, output_len, num_prompts, and concurrency, write raw_results.csv, and stop the server. Measure decode throughput, TTFT, TPOT, and KV-cache occupancy"
-  },
-  {
-    "field_name": "Execution Description With Parameters",
-    "source_file": "BenchmarkSpecDefinitions.xlsx::Workload_Definitions",
-    "value": "Starts python -m vllm.entrypoints.openai.api_server with mistralai/Mistral-7B-v0.3 on 127.0.0.1:8000 for every profile, waits for /v1/models, runs scripts/benchmark_serving.py once, then stops the server. input_len, output_len, num_prompts, concurrency, and max_model_len come from yaml. output_format: csv"
-  },
-  {
-    "field_name": "Execution Domain",
-    "source_file": "BenchmarkSpecDefinitions.xlsx::Workload_Definitions",
-    "value": "LLM Serving"
-  },
-  {
-    "field_name": "Workload Category",
-    "source_file": "BenchmarkSpecDefinitions.xlsx::Workload_Definitions",
-    "value": "LLM Inference & Serving"
-  },
-  {
-    "field_name": "Workload Type",
-    "source_file": "BenchmarkSpecDefinitions.xlsx::Workload_Definitions",
-    "value": "Benchmark"
-  },
-  {
-    "field_name": "Target Hardware",
-    "source_file": "BenchmarkSpecDefinitions.xlsx::Workload_Definitions",
-    "value": "GPU"
-  },
-  {
-    "field_name": "GPU Model",
-    "source_file": "BenchmarkSpecDefinitions.xlsx::Workload_Definitions",
-    "value": "H100 SXM 80GB"
-  },
-  {
-    "field_name": "Raw Output Format",
-    "source_file": "BenchmarkSpecDefinitions.xlsx::Workload_Definitions",
-    "value": "raw_results.csv with sweep_0, sweep_1, and a summary row. raw_results.jsonl and raw_output.txt carry the same records"
-  },
-  {
-    "field_name": "Primary Record Granularity",
-    "source_file": "BenchmarkSpecDefinitions.xlsx::Workload_Definitions",
-    "value": "two sweep rows and one summary row"
-  },
-  {
-    "field_name": "Raw Output Example",
-    "source_file": "BenchmarkSpecDefinitions.xlsx::Workload_Definitions",
-    "value": "check_name,status,completed_requests,output_tokens_per_sec,ttft_msec,tpot_msec,kv_cache_usage_peak_pct,kv_cache_peak_gb,decode_throughput_tokens_sec\nsweep_0,ok,8,40,25,12,20,8,40\nsummary,ok,8,40,25,12,20,8,40"
-  },
-  {
-    "field_name": "run_benchmark Command Plus Options for Smoke Run",
-    "source_file": "BenchmarkSpecDefinitions.xlsx::Workload_Definitions",
-    "value": "bash run_benchmark.sh --smoke --validate --model-name mistralai/Mistral-7B-v0.3 --dtype bfloat16 --kv-cache-dtype auto --gpu-memory-utilization 0.9 --max-model-len 128 --input-len 64 --output-len 16 --num-prompts 2 --concurrency 2 --seed 0"
-  },
-  {
-    "field_name": "run_benchmark Command Plus Options for Baseline Run",
-    "source_file": "BenchmarkSpecDefinitions.xlsx::Workload_Definitions",
-    "value": "bash run_benchmark.sh --baseline --validate --model-name mistralai/Mistral-7B-v0.3 --dtype bfloat16 --kv-cache-dtype auto --gpu-memory-utilization 0.9 --max-model-len 8192 --input-len 4096 --output-len 256 --num-prompts 136 --concurrency 8 --seed 0"
-  },
-  {
-    "field_name": "run_benchmark Command Plus Options for Extended Run",
-    "source_file": "BenchmarkSpecDefinitions.xlsx::Workload_Definitions",
-    "value": "bash run_benchmark.sh --extended --validate --model-name mistralai/Mistral-7B-v0.3 --dtype bfloat16 --kv-cache-dtype auto --gpu-memory-utilization 0.9 --max-model-len 8192 --input-len 4096 --output-len 256 --num-prompts 592 --concurrency 8 --seed 0"
-  },
-  {
-    "field_name": "Output Fields / Metrics to Parse",
-    "source_file": "BenchmarkSpecDefinitions.xlsx::Workload_Definitions",
-    "value": "decode_throughput_tokens_sec, ttft_msec, tpot_msec, kv_cache_hbm_utilization_gb_and_percentage_of_capacity, kv_cache_peak_gb"
-  },
-  {
-    "field_name": "Success Criteria",
-    "source_file": "BenchmarkSpecDefinitions.xlsx::Workload_Definitions",
-    "value": "The server completes both sweeps, raw_results.csv status=ok, and validation accepts the SQLite rows"
-  },
-  {
-    "field_name": "Parser and Normalization Notes",
-    "source_file": "BenchmarkSpecDefinitions.xlsx::Workload_Definitions",
-    "value": "Parse raw_results.csv rows sweep_0, sweep_1, and summary. raw_output.txt is JSON for inspection. A missing KV sample is na (server reported no KV-cache usage)"
-  },
-  {
-    "field_name": "Hardware Config",
-    "source_file": "BenchmarkSpecDefinitions.xlsx::Workload_Definitions",
-    "value": "NVIDIA H100 SXM host (20+ vCPUs, 128+ GB RAM, local NVMe), 1x H100 SXM (80 GB HBM3, sm_90, 132 SMs)"
-  },
-  {
-    "field_name": "GPU Architecture",
-    "source_file": "BenchmarkSpecDefinitions.xlsx::Workload_Definitions",
-    "value": "sm_90 (NVIDIA Hopper H100)"
-  },
-  {
-    "field_name": "Framework",
-    "source_file": "BenchmarkSpecDefinitions.xlsx::Workload_Definitions",
-    "value": "Bash, SQLite, Python, PyYAML, CUDA Runtime, PyTorch-CUDA, Hugging Face Transformers, Mistral-7B-v0.3, vLLM, HTTP client harness"
-  },
-  {
-    "field_name": "Kernel Version",
-    "source_file": "BenchmarkSpecDefinitions.xlsx::Workload_Definitions",
-    "value": "kernel 7.0.0"
-  },
-  {
-    "field_name": "Runtime Language",
-    "source_file": "BenchmarkSpecDefinitions.xlsx::Workload_Definitions",
-    "value": "Python"
-  },
-  {
-    "field_name": "Container Base Image",
-    "source_file": "BenchmarkSpecDefinitions.xlsx::Workload_Definitions",
-    "value": "Provider-supplied Ubuntu 26.04 container; CUDA 13.3 toolkit installed by setup"
-  },
-  {
-    "field_name": "Python Version",
-    "source_file": "BenchmarkSpecDefinitions.xlsx::Workload_Definitions",
-    "value": "Python 3.14.4"
-  },
-  {
-    "field_name": "GPU Runtime Version (was ROCm Version)",
-    "source_file": "BenchmarkSpecDefinitions.xlsx::Workload_Definitions",
-    "value": "CUDA 13.3 (nvcc 13.3.73). Driver 580.159.04 reports CUDA 13.0"
-  },
-  {
-    "field_name": "BLAS Version (was rocBLAS version)",
-    "source_file": "BenchmarkSpecDefinitions.xlsx::Workload_Definitions",
-    "value": "N/A - cuBLAS not used"
-  },
-  {
-    "field_name": "Mistral-7B Version",
-    "source_file": "BenchmarkSpecDefinitions.xlsx::Workload_Definitions",
-    "value": "Mistral-7B-v0.3"
-  },
-  {
-    "field_name": "PyTorch Version",
-    "source_file": "BenchmarkSpecDefinitions.xlsx::Workload_Definitions",
-    "value": "PyTorch 2.13.0+cu130 (installed by vLLM 0.31.0)"
-  },
-  {
-    "field_name": "torchvision Version",
-    "source_file": "BenchmarkSpecDefinitions.xlsx::Workload_Definitions",
-    "value": "N/A - torchvision not used"
-  },
-  {
-    "field_name": "vLLM Version",
-    "source_file": "BenchmarkSpecDefinitions.xlsx::Workload_Definitions",
-    "value": "vLLM 0.31.0"
-  },
-  {
-    "field_name": "vLLM Wheel/Source Index",
-    "source_file": "BenchmarkSpecDefinitions.xlsx::Workload_Definitions",
-    "value": "PyPI vllm==0.31.0 (pulls torch 2.13.0+cu130)"
-  },
-  {
-    "field_name": "SGLang Version",
-    "source_file": "BenchmarkSpecDefinitions.xlsx::Workload_Definitions",
-    "value": "N/A - SGLang not used"
-  },
-  {
-    "field_name": "SGLang Repository/Commit",
-    "source_file": "BenchmarkSpecDefinitions.xlsx::Workload_Definitions",
-    "value": "N/A - SGLang not used"
-  },
-  {
-    "field_name": "Cmake Version",
-    "source_file": "BenchmarkSpecDefinitions.xlsx::Workload_Definitions",
-    "value": "N/A - CMake not used"
-  },
-  {
-    "field_name": "g++ Version",
-    "source_file": "BenchmarkSpecDefinitions.xlsx::Workload_Definitions",
-    "value": "N/A - g++ not used"
-  },
-  {
-    "field_name": "Known Runtime Constraints (<=35 Words Each)",
-    "source_file": "BenchmarkSpecDefinitions.xlsx::Workload_Definitions",
-    "value": "Every profile starts vLLM's OpenAI API server. dtype must be bfloat16. Server ready-wait is 600 s, or 1800 s for baseline. Exclusive GPU recommended. Missing KV metrics read na"
   },
   {
     "field_name": "Parameter_01",
@@ -328,6 +138,196 @@
     "field_name": "Parameter_20",
     "source_file": "BenchmarkSpecDefinitions.xlsx::Workload_Definitions",
     "value": "-"
+  },
+  {
+    "field_name": "run_benchmark Command Plus Options for Smoke Run (One minute or less)",
+    "source_file": "BenchmarkSpecDefinitions.xlsx::Workload_Definitions",
+    "value": "bash run_benchmark.sh --smoke --validate --model-name mistralai/Mistral-7B-v0.3 --dtype bfloat16 --kv-cache-dtype auto --gpu-memory-utilization 0.9 --max-model-len 128 --input-len 64 --output-len 16 --num-prompts 2 --concurrency 2 --seed 0"
+  },
+  {
+    "field_name": "run_benchmark Command Plus Options for Baseline Run (3 to 5 minutes)",
+    "source_file": "BenchmarkSpecDefinitions.xlsx::Workload_Definitions",
+    "value": "bash run_benchmark.sh --baseline --validate --model-name mistralai/Mistral-7B-v0.3 --dtype bfloat16 --kv-cache-dtype auto --gpu-memory-utilization 0.9 --max-model-len 8192 --input-len 4096 --output-len 256 --num-prompts 136 --concurrency 8 --seed 0"
+  },
+  {
+    "field_name": "run_benchmark Command Plus Options for Extended Run (8 to 15 minutes)",
+    "source_file": "BenchmarkSpecDefinitions.xlsx::Workload_Definitions",
+    "value": "bash run_benchmark.sh --extended --validate --model-name mistralai/Mistral-7B-v0.3 --dtype bfloat16 --kv-cache-dtype auto --gpu-memory-utilization 0.9 --max-model-len 8192 --input-len 4096 --output-len 256 --num-prompts 592 --concurrency 8 --seed 0"
+  },
+  {
+    "field_name": "Validation Objective",
+    "source_file": "BenchmarkSpecDefinitions.xlsx::Workload_Definitions",
+    "value": "Validates decode throughput, TTFT, TPOT, and KV-cache occupancy from the real vLLM OpenAI server. Every profile starts python -m vllm.entrypoints.openai.api_server"
+  },
+  {
+    "field_name": "Command Tools Executed",
+    "source_file": "BenchmarkSpecDefinitions.xlsx::Workload_Definitions",
+    "value": "Start python -m vllm.entrypoints.openai.api_server on port 8000, then run scripts/benchmark_serving.py"
+  },
+  {
+    "field_name": "Command Execution Details and Purpose",
+    "source_file": "BenchmarkSpecDefinitions.xlsx::Workload_Definitions",
+    "value": "Start python -m vllm.entrypoints.openai.api_server --model mistralai/Mistral-7B-v0.3 on 127.0.0.1:8000 for every profile, wait for /v1/models, run scripts/benchmark_serving.py once with yaml input_len, output_len, num_prompts, and concurrency, then stop the server, to measure KV-cache stress"
+  },
+  {
+    "field_name": "Command Methodology",
+    "source_file": "BenchmarkSpecDefinitions.xlsx::Workload_Definitions",
+    "value": "Start python -m vllm.entrypoints.openai.api_server with mistralai/Mistral-7B-v0.3 on 127.0.0.1:8000 for every profile, wait for /v1/models, run scripts/benchmark_serving.py once with yaml input_len, output_len, num_prompts, and concurrency, write raw_results.csv, and stop the server. Measure decode throughput, TTFT, TPOT, and KV-cache occupancy"
+  },
+  {
+    "field_name": "Execution Description With Parameters",
+    "source_file": "BenchmarkSpecDefinitions.xlsx::Workload_Definitions",
+    "value": "Starts python -m vllm.entrypoints.openai.api_server with mistralai/Mistral-7B-v0.3 on 127.0.0.1:8000 for every profile, waits for /v1/models, runs scripts/benchmark_serving.py once, then stops the server. input_len, output_len, num_prompts, concurrency, and max_model_len come from yaml. output_format: csv"
+  },
+  {
+    "field_name": "Execution Domain",
+    "source_file": "BenchmarkSpecDefinitions.xlsx::Workload_Definitions",
+    "value": "LLM Serving"
+  },
+  {
+    "field_name": "Workload Category",
+    "source_file": "BenchmarkSpecDefinitions.xlsx::Workload_Definitions",
+    "value": "LLM Inference & Serving"
+  },
+  {
+    "field_name": "Workload Type",
+    "source_file": "BenchmarkSpecDefinitions.xlsx::Workload_Definitions",
+    "value": "Benchmark"
+  },
+  {
+    "field_name": "Target Hardware",
+    "source_file": "BenchmarkSpecDefinitions.xlsx::Workload_Definitions",
+    "value": "GPU"
+  },
+  {
+    "field_name": "GPU Model",
+    "source_file": "BenchmarkSpecDefinitions.xlsx::Workload_Definitions",
+    "value": "H100 SXM 80GB"
+  },
+  {
+    "field_name": "Raw Output Format",
+    "source_file": "BenchmarkSpecDefinitions.xlsx::Workload_Definitions",
+    "value": "raw_results.csv with sweep_0, sweep_1, and a summary row. raw_results.jsonl and raw_output.txt carry the same records"
+  },
+  {
+    "field_name": "Primary Record Granularity",
+    "source_file": "BenchmarkSpecDefinitions.xlsx::Workload_Definitions",
+    "value": "two sweep rows and one summary row"
+  },
+  {
+    "field_name": "Raw Output Example",
+    "source_file": "BenchmarkSpecDefinitions.xlsx::Workload_Definitions",
+    "value": "check_name,status,completed_requests,output_tokens_per_sec,ttft_msec,tpot_msec,kv_cache_usage_peak_pct,kv_cache_peak_gb,decode_throughput_tokens_sec\nsweep_0,ok,8,40,25,12,20,8,40\nsummary,ok,8,40,25,12,20,8,40"
+  },
+  {
+    "field_name": "Output Fields / Metrics to Parse",
+    "source_file": "BenchmarkSpecDefinitions.xlsx::Workload_Definitions",
+    "value": "decode_throughput_tokens_sec, ttft_msec, tpot_msec, kv_cache_hbm_utilization_gb_and_percentage_of_capacity, kv_cache_peak_gb"
+  },
+  {
+    "field_name": "Success Criteria",
+    "source_file": "BenchmarkSpecDefinitions.xlsx::Workload_Definitions",
+    "value": "The server completes both sweeps, raw_results.csv status=ok, and validation accepts the SQLite rows"
+  },
+  {
+    "field_name": "Parser and Normalization Notes",
+    "source_file": "BenchmarkSpecDefinitions.xlsx::Workload_Definitions",
+    "value": "Parse raw_results.csv rows sweep_0, sweep_1, and summary. raw_output.txt is JSON for inspection. A missing KV sample is na (server reported no KV-cache usage)"
+  },
+  {
+    "field_name": "Hardware Config",
+    "source_file": "BenchmarkSpecDefinitions.xlsx::Workload_Definitions",
+    "value": "NVIDIA H100 SXM host (20+ vCPUs, 128+ GB RAM, local NVMe), 1x H100 SXM (80 GB HBM3, sm_90, 132 SMs)"
+  },
+  {
+    "field_name": "GPU Architecture",
+    "source_file": "BenchmarkSpecDefinitions.xlsx::Workload_Definitions",
+    "value": "sm_90 (NVIDIA Hopper H100)"
+  },
+  {
+    "field_name": "Framework",
+    "source_file": "BenchmarkSpecDefinitions.xlsx::Workload_Definitions",
+    "value": "Bash, SQLite, Python, PyYAML, CUDA Runtime, PyTorch-CUDA, Hugging Face Transformers, Mistral-7B-v0.3, vLLM, HTTP client harness"
+  },
+  {
+    "field_name": "Kernel Version",
+    "source_file": "BenchmarkSpecDefinitions.xlsx::Workload_Definitions",
+    "value": "kernel 7.0.0"
+  },
+  {
+    "field_name": "Runtime Language",
+    "source_file": "BenchmarkSpecDefinitions.xlsx::Workload_Definitions",
+    "value": "Python"
+  },
+  {
+    "field_name": "Container Base Image",
+    "source_file": "BenchmarkSpecDefinitions.xlsx::Workload_Definitions",
+    "value": "host-native Ubuntu 26.04"
+  },
+  {
+    "field_name": "Python Version",
+    "source_file": "BenchmarkSpecDefinitions.xlsx::Workload_Definitions",
+    "value": "Python 3.14.4"
+  },
+  {
+    "field_name": "GPU Runtime Version (was ROCm Version)",
+    "source_file": "BenchmarkSpecDefinitions.xlsx::Workload_Definitions",
+    "value": "CUDA 13.3 (nvcc 13.3.73). Driver 580.159.04 reports CUDA 13.0"
+  },
+  {
+    "field_name": "BLAS Version (was rocBLAS version)",
+    "source_file": "BenchmarkSpecDefinitions.xlsx::Workload_Definitions",
+    "value": "N/A - cuBLAS not used"
+  },
+  {
+    "field_name": "Mistral-7B Version",
+    "source_file": "BenchmarkSpecDefinitions.xlsx::Workload_Definitions",
+    "value": "Mistral-7B-v0.3"
+  },
+  {
+    "field_name": "PyTorch Version",
+    "source_file": "BenchmarkSpecDefinitions.xlsx::Workload_Definitions",
+    "value": "PyTorch 2.13.0+cu130 (installed by vLLM 0.31.0)"
+  },
+  {
+    "field_name": "torchvision Version",
+    "source_file": "BenchmarkSpecDefinitions.xlsx::Workload_Definitions",
+    "value": "N/A - torchvision not used"
+  },
+  {
+    "field_name": "vLLM Version",
+    "source_file": "BenchmarkSpecDefinitions.xlsx::Workload_Definitions",
+    "value": "vLLM 0.31.0"
+  },
+  {
+    "field_name": "vLLM Wheel/Source Index",
+    "source_file": "BenchmarkSpecDefinitions.xlsx::Workload_Definitions",
+    "value": "PyPI vllm==0.31.0 (pulls torch 2.13.0+cu130)"
+  },
+  {
+    "field_name": "SGLang Version",
+    "source_file": "BenchmarkSpecDefinitions.xlsx::Workload_Definitions",
+    "value": "N/A - SGLang not used"
+  },
+  {
+    "field_name": "SGLang Repository/Commit",
+    "source_file": "BenchmarkSpecDefinitions.xlsx::Workload_Definitions",
+    "value": "N/A - SGLang not used"
+  },
+  {
+    "field_name": "Cmake Version",
+    "source_file": "BenchmarkSpecDefinitions.xlsx::Workload_Definitions",
+    "value": "N/A - CMake not used"
+  },
+  {
+    "field_name": "g++ Version",
+    "source_file": "BenchmarkSpecDefinitions.xlsx::Workload_Definitions",
+    "value": "N/A - g++ not used"
+  },
+  {
+    "field_name": "Known Runtime Constraints (<=35 Words Each)",
+    "source_file": "BenchmarkSpecDefinitions.xlsx::Workload_Definitions",
+    "value": "Every profile starts vLLM's OpenAI API server. dtype must be bfloat16. Server ready-wait is 600 s, or 1800 s for baseline. Exclusive GPU recommended. Missing KV metrics read na"
   },
   {
     "field_name": "GPU Architecutre ID",
