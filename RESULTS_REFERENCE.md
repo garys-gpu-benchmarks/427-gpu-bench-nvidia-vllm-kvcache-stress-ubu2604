@@ -3,24 +3,24 @@
 **Main goal:** Analyze LLM KV-cache stress under long contexts  
 **Tools:** Start python -m vllm.entrypoints.openai.api_server on port 8000, then run scripts/benchmark_serving.py
 
-Reference results measured by the maintainer on the system shown in each section (generator TEMPLATE_00_146 · recorded 2026-11-18). Your own runs write `results/RESULTS_ACTUAL.md` in the same format.
+Reference results measured by the maintainer on the system shown in each section (generator TEMPLATE_00_148 · recorded 2026-11-19). Your own runs write `results/RESULTS_ACTUAL.md` in the same format.
 
 > Smoke runs use deliberately small sizes. They check that the workload installs and runs end to end; their numbers are not performance results. Baseline and extended are.
 
 <!-- profile:smoke -->
 ## smoke
 
-- **System:** 1× NVIDIA H100 NVL (95830 MiB) · AMD EPYC 9374F 32-Core Processor · Ubuntu 26.04.1 LTS · kernel 6.8.0-138-generic · driver 595.112.07
-- **Run:** 2026-11-18T11:21:40Z · status **PASS** (exit 0)
-- **Time (mm:ss):** setup 03:52 · benchmark 00:02 · whole run 04:06
-- **Source:** run 427_20261118_112140
+- **System:** 1× NVIDIA H100 NVL (95830 MiB) · Intel(R) Xeon(R) Platinum 8452Y · Ubuntu 26.04.1 LTS · kernel 6.8.0-138-generic · driver 595.112.07
+- **Run:** 2026-11-19T16:06:30Z · status **PASS** (exit 0)
+- **Time (mm:ss):** setup 07:33 · benchmark 00:02 · whole run 07:56
+- **Source:** run 427_20261119_160630
 - **Command:** `bash run_benchmark.sh --smoke --model-name mistralai/Mistral-7B-v0.3 --dtype bfloat16 --kv-cache-dtype auto --gpu-memory-utilization 0.9 --max-model-len 128 --input-len 64 --output-len 16 --num-prompts 2 --concurrency 2 --seed 0`
 
 | # | Metric | Result |
 |---|---|---|
-| 1 | Aggregate decode throughput, tokens/s (decode_throughput_tokens_sec) | 345.5066423724394 |
-| 2 | Time To First Token p50, ms (ttft_msec) | 32.80097750030109 |
-| 3 | TPOT p50, ms (tpot_msec) | 5.481338100071298 |
+| 1 | Aggregate decode throughput, tokens/s (decode_throughput_tokens_sec) | 347.59558942318165 |
+| 2 | Time To First Token p50, ms (ttft_msec) | 55.98004175408278 |
+| 3 | TPOT p50, ms (tpot_msec) | 5.4881311327335425 |
 | 4 | Peak KV-cache usage, GiB (kv_cache_peak_gb) | 0.023437042984543174 |
 | 5 | KV-cache usage peak, pct (kv_cache_usage_peak_pct) | 0.03441057551687443 |
 <!-- /profile:smoke -->
